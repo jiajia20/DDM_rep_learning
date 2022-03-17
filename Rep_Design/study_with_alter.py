@@ -7,8 +7,8 @@ import random
 from alhazen import IteratedExperiment
 import pyibl
 
-GROUPS = 1
-ROUNDS = 300
+GROUPS = 100
+ROUNDS = 150
 
 PAIRINGS = {
     "disconnected": [[(0, 1), (2, 3), (4, 5)]],
@@ -82,9 +82,9 @@ class Game(IteratedExperiment):
         #initialize first move 
         last_move = ['o'] *NODES
         for i in range(NODES):
-            last_move[i] = random.choice('CD') 
-        #last_move[0] = 'D'
-        #last_move[2] = 'D'
+            last_move[i] = 'C'#random.choice('CD') 
+        last_move[0] = 'D'
+        last_move[2] = 'D'
 
         # for n in range(0,16): #0-15
         #     globals()[f'last_move_{n}'] = random.choice('CD')
