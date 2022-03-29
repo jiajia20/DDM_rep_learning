@@ -40,4 +40,9 @@ It also include new field that
 ### 1 - Reputation_learning_modifed_from _OG
 This is the first attempt to include reputation learning in the original binary choice game. This version the repuation information is ot updating right after adding alhazen. 
 
-### 2 - 
+### 2 - Reputation_learning_in_loop
+- fix the reputation updating by removing alhazen and write the simulation only in loops
+- specified four different loops and the related vaiables 
+  
+
+## 
