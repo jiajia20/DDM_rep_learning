@@ -80,14 +80,10 @@ class Game(IteratedExperiment):
         defect_DD = { "button": "defect", "reputation": 'DD' }
 
         #initialize first move 
-        last_move = ['o'] *NODES
-        for i in range(NODES):
-            last_move[i] = random.choice('CD') 
-        #last_move[0] = 'D'
-        #last_move[2] = 'D'
-
-        # for n in range(0,16): #0-15
-        #     globals()[f'last_move_{n}'] = random.choice('CD')
+        if round == 0:
+            self.last_move_list = ['o'] *NODES #fix this to be self.last_move_list
+            for i in range(NODES):
+                self.last_move_list[i] = random.choice('CD') 
 
         for p in random.choice(PAIRINGS[condition]):
             # figure which opponent
@@ -99,7 +95,7 @@ class Game(IteratedExperiment):
             #b_last = last_move[p[1]]
             # a_last = globals()[f'last_move_{p[0]}']
             # b_last = globals()[f'last_move_{p[1]}']
-            last_round = last_move[p[0]] + last_move[p[1]]#a_last+b_last
+            last_round = self.last_move_list[p[0]] + self.last_move_list[p[1]]#a_last+b_last
 
             # make new choice based on past repuation of both participant
             if last_round == 'CC':
@@ -111,7 +107,7 @@ class Game(IteratedExperiment):
             elif last_round == 'DC':
                 result_a = a.choose(cooperate_DC, defect_DC)
                 result_b = b.choose(cooperate_CD, defect_CD)
-            else:
+            elif last_round == 'DD':
                 result_a = a.choose(cooperate_DD, defect_DD)
                 result_b = b.choose(cooperate_DD, defect_DD)
 
@@ -122,26 +118,26 @@ class Game(IteratedExperiment):
                 a.respond(5)
                 b.respond(5)
                 #result += 1 / (PAIRS * GROUPS)
-                (last_move[p[0]],last_move[p[1]])=('CC')
+                (self.last_move_list[p[0]],self.last_move_list[p[1]])=('CC')
                 # a_last = 'C'
                 # b_last = 'C'
                 
             elif pair_result == ('cooperate', 'defect'):
                 a.respond(0)
                 b.respond(5)
-                (last_move[p[0]],last_move[p[1]])=('CD')
+                (self.last_move_list[p[0]],self.last_move_list[p[1]])=('CD')
                 # a_last = 'C'
                 # b_last = 'D'
             elif pair_result == ('defect', 'cooperate'):
                 a.respond(5)
                 b.respond(0)
-                (last_move[p[0]],last_move[p[1]])=('DC')
+                (self.last_move_list[p[0]],self.last_move_list[p[1]])=('DC')
                 # a_last = 'D'
                 # b_last = 'C'
-            else:
+            elif pair_result == ('defect', 'defect'):
                 a.respond(0)
                 b.respond(0)
-                (last_move[p[0]],last_move[p[1]])=('DD')
+                (self.last_move_list[p[0]],self.last_move_list[p[1]])=('DD')
                 # a_last = 'D'
                 # b_last = 'D'
             
